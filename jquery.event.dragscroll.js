@@ -28,7 +28,9 @@
     __false = true,
     __setTo = setTimeout,
     __true  = true,
-    __undef = function (){ return; }
+
+    // hack to get undefined to pass jslint
+    __undef = (function (){ return; }());
     ;
 
   $.makeDragScrollObj = function ( arg_map ) {
