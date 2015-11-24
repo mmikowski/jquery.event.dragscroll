@@ -1,0 +1,51 @@
+{
+  "name": "jquery.event.dragscroll",
+  "version": "0.9.0",
+  "description": "Dragscroll allows you to create numerous inertia scrolling areas all with their own properties.",
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery",
+    "jquery", "plugin",
+    "drag",
+    "scroll",
+    "drag scroll",
+    "dragscroll",
+    "inertia",
+    "inertia scroll",
+    "inertiascroll",
+    "event","events",
+    "desktop and mobile",
+    "desktop and touch",
+    "desktop", "touch","mobile",
+    "phone","tablet",
+    "drag","zoom","tap","click"
+  ],
+  "main": "jquery.event.dragscroll.js",
+  "scripts": {
+    "test": "echo \"See dragscroll-test.html\" && exit 0;"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mmikowski/jquery.event.dragscroll.git"
+  },
+  "author": "Michael S. Mikowski <mike.mikowski@gmail.com>",
+  "license": "GPLv2",
+  "bugs": {
+    "url": "https://github.com/mmikowski/jquery.event.dragscroll/issues"
+  },
+  "homepage": "https://github.com/mmikowski/jquery.event.dragscroll",
+  "dependencies": {
+    "jquery": ">=1.7.0",
+    "jquery-mousewheel" : ">=3.0.0",
+    "jquery.event.ue" : ">=0.5.0"
+  },
+  "licenses": [
+    { "type": "MIT",
+      "url": "https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt"
+    },
+    { "type": "GPLv2",
+      "url": "http://www.gnu.org/licenses/gpl-2.0.html"
+    }
+  ],
+  "maintainers": [ "Michael S. Mikowski <mike.mikowski@gmail.com>" ]
+}
