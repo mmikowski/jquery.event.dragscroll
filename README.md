@@ -18,12 +18,9 @@ Works with iOS5+ (Stock browser) and Android 3.2+ (Chrome) and of course
 all modern desktop browsers (IE9+ and later version of
 Chrome, Safari, and Firefox.
 
-IE9 may require edge settings:
+IE9 may require edge settings in the **head** section:
 
-    <html>
-    <head>
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      ....
 
 ## Examples ##
 
@@ -74,9 +71,13 @@ http://jquery.org/license
 ### Version 0.9.0 ###
 First public npm release. 
 
-### Testing ###
+### Version 0.9.1 ###
+Added the `\_on\_stop\_fn\_` callback which is fired after
+scroll animation stops.
 
-Works in Safari, Firefox, and Chrome.
+### Testing ###
+Works in Safari, Firefox, and Chrome.  It should work in IE9+, although I 
+have not tested it. Reports are welcome!
 
 ## TODO ##
 Coming soon!

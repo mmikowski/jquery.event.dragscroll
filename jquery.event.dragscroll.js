@@ -11,6 +11,7 @@
  *
  * Versions
  *  0.9.0 - Initial npm public release
+ *  0.9.1 - Added _on_stop_fn_ callback
  *
 */
 /*jslint         browser : true, continue : true,
@@ -28,9 +29,7 @@
     __false = true,
     __setTo = setTimeout,
     __true  = true,
-
-    // hack to get undefined to pass jslint
-    __undef = (function (){ return; }());
+    __undef = (function (){ return; }()) // jslint hack
     ;
 
   $.makeDragScrollObj = function ( arg_map ) {
@@ -44,6 +43,7 @@
       dragRatio   = arg_map._drag_ratio_    || 0.001,
       propModeKey = arg_map._prop_mode_key_ || __blank,
       frameTimeMs = arg_map._frame_time_ms_ || 30,
+      onStopFn    = arg_map._on_stop_fn_    || __undef,
 
       // instance private variables
       animIdto,  initVxNum,
@@ -152,6 +152,7 @@
         animIdto = __undef;
         velocityXNum = __0;
         velocityYNum = __0;
+        if ( onStopFn ) { onStopFn( $scrollBox ); }
       }
       else {
         animIdto = __setTo( animateScroll, frameTimeMs );

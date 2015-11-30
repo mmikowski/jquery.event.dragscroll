@@ -1,6 +1,6 @@
 {
   "name": "jquery.event.dragscroll",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Dragscroll allows you to create numerous inertia scrolling areas all with their own properties.",
   "keywords": [
     "jquery-plugin",
@@ -39,13 +39,6 @@
     "jquery-mousewheel" : ">=3.0.0",
     "jquery.event.ue" : ">=0.5.0"
   },
-  "licenses": [
-    { "type": "MIT",
-      "url": "https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt"
-    },
-    { "type": "GPLv2",
-      "url": "http://www.gnu.org/licenses/gpl-2.0.html"
-    }
-  ],
+  "license": "MIT",
   "maintainers": [ "Michael S. Mikowski <mike.mikowski@gmail.com>" ]
 }
