@@ -1,6 +1,6 @@
 {
   "name": "jquery.event.dragscroll",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Dragscroll allows you to create numerous inertia scrolling areas all with their own properties.",
   "keywords": [
     "jquery-plugin",
