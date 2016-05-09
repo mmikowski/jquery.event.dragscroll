@@ -12,6 +12,7 @@
  * Versions
  *  0.9.0 - Initial npm public release
  *  0.9.1 - Added _on_stop_fn_ callback
+ *  0.9.3 - Updated docs
  *
 */
 /*jslint         browser : true, continue : true,
