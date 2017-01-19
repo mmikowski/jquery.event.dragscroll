@@ -11,16 +11,138 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Dragscroll test page</title>
 
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="node_modules/jquery-mousewheel/jquery.mousewheel.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.slim.js"
+    integrity="sha256-5i/mQ300M779N2OVDrl16lbohwXNUdzL/R2aVUXyXWA="
+    crossorigin="anonymous">
+  </script>
   <script src="node_modules/jquery.event.ue/jquery.event.ue.js"></script>
-  <script src="jquery.event.dragscroll.js"></script>
-  <script></script>
-
+  <script src="dist/jquery.event.dragscroll.js"></script>
+  <script>
+  $(function (){
+    var scroll_obj = $.makeDragScrollObj({
+      _$scroll_box_ : $( 'body' )
+    });
+ 
+    $( 'body' )
+      .on( 'udragend',   scroll_obj._onendHandler_   )
+      .on( 'udragmove',  scroll_obj._onmoveHandler_  )
+      .on( 'udragstart', scroll_obj._onstartHandler_ )
+      ;
+  });
+  </script>
 </head>
 
 <body>
-<h1>Coming Soon</h1>
+<p>
+<pre>
+  $(function (){
+    var scroll_obj = $.makeDragScrollObj({ _$scroll_box_ : $( 'body' ) });
+ 
+    $( 'body' )
+      .on( 'udragend',   scroll_obj._onendHandler_   )
+      .on( 'udragmove',  scroll_obj._onmoveHandler_  )
+      .on( 'udragstart', scroll_obj._onstartHandler_ )
+      ;
+  });
+</pre>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
+<p>Content<p>
+<p>That</p>
+<p>Should...</p>
+<p>Scroll.</p>
+<p></p>
+
 </body>
 </html>
 

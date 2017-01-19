@@ -1,7 +1,16 @@
 /*
  * jQuery plugin for drag initiated inertia scroll objects.
- * Each instance of the object create provides unique
- * inertia scrolling to an assigned area.
+ * Example:
+ *
+ *  var drag_obj = $.makeDragScrollObj({
+ *    _$scroll_box_ : $( 'body' )
+ *  });
+ *
+ *  $( 'body' )
+ *    .on( 'udragend',   drag_obj._onendHandler_   )
+ *    .on( 'udragmove',  drag_obj._onmoveHandler_  )
+ *    .on( 'udragstart', drag_obj._onstartHandler_ )
+ *    ;
  *
  * Copyright (c) 2015 Michael S. Mikowski
  * (mike[dot]mikowski[at]gmail[dotcom])
@@ -13,18 +22,20 @@
  *  0.9.0 - Initial npm public release
  *  0.9.1 - Added _on_stop_fn_ callback
  *  0.9.3 - Updated docs
+ *  1.0.0 - Added support for the 'body' element
  *
 */
-/*jslint         browser : true, continue : true,
-   devel : true,  indent : 2,      maxerr : 50,
-  newcap : true,   nomen : true, plusplus : true,
-  regexp : true,  sloppy : true,     vars : false,
-   white : true,    todo : true,  unparam : true
+/*jslint          browser : true, continue : true,
+  devel  : true,  indent  : 2,    maxerr   : 50,
+  newcap : true,  nomen   : true, plusplus : true,
+  regexp : true,  sloppy  : true, vars     : false,
+  white  : true,  todo    : true, unparam  : true
 */
 /*global jQuery */
+
 (function ( $ ) {
   'use strict';
-  var 
+  var
     __0     = 0,
     __blank = '',
     __false = true,
@@ -35,39 +46,35 @@
 
   $.makeDragScrollObj = function ( arg_map ) {
     var
-      // Private variables from settings
-      $scrollBox  = arg_map._$scroll_box_,
-
+      $argBox     = arg_map._$scroll_box_,
       doScrollX   = arg_map._do_scroll_x_ === __true  ? __true  : __false,
       doScrollY   = arg_map._do_scroll_y_ === __false ? __false : __true,
-
       dragRatio   = arg_map._drag_ratio_    || 0.001,
       propModeKey = arg_map._prop_mode_key_ || __blank,
       frameTimeMs = arg_map._frame_time_ms_ || 30,
       onStopFn    = arg_map._on_stop_fn_    || __undef,
 
-      // instance private variables
-      animIdto,  initVxNum,
-      initVyNum, lastAnimMs,
-      lastDtMs,  lastDxNum,
-      lastDyNum, lastMoveMs,
-      maxScrollLeftNum,
-      maxScrollTopNum,
-      velocityXNum, velocityYNum,
-
-      // private methods
-      makeTimeStamp, employMode, animateScroll, 
-
-      // public uility methods
-      getVxVyList, stopScroll,
-
-      // public event handlers 
-      onstartHandler, onmoveHandler, onendHandler
+      $scrollBox,
+      animIdto,         initVxNum,
+      initVyNum,        isBodyTag,
+      lastAnimMs,       lastDtMs,
+      lastDxNum,        lastDyNum,
+      lastMoveMs,       maxScrollLeftNum,
+      maxScrollTopNum,  velocityXNum,
+      velocityYNum
       ;
 
+    if ( $argBox && $argBox.jquery && $argBox.length > 0 ) {
+      $scrollBox = $argBox.eq( 0 );
+      isBodyTag  = $scrollBox[ 0 ].tagName === 'BODY';
+    }
+    else {
+      throw '_$scroll_box_must_be_provided_';
+    }
+
     //------------------ BEGIN PRIVATE METHODS -------------------
-    makeTimeStamp = function () { return +new Date(); };
-    employMode = function ( event_obj ) {
+    function makeTimeStamp () { return +new Date(); }
+    function employMode ( event_obj ) {
       var is_changed = __true;
 
       switch ( propModeKey ) {
@@ -86,9 +93,9 @@
           is_changed = __false;
       }
       return is_changed;
-    };
+    }
 
-    animateScroll = function () {
+    function animateScroll () {
       var ts_ms, delta_ms, scrolltop_num, scrollleft_num, do_y_stop, do_x_stop;
       ts_ms = makeTimeStamp();
       if ( lastAnimMs > __0 ) {
@@ -161,15 +168,15 @@
 
       // remember last shown time for frame pacing
       lastAnimMs = ts_ms;
-    };
+    }
     //------------------- END PRIVATE METHODS --------------------
 
-    //--------------- BEGIN PUBLIC UTILITY METHODS --------------- 
-    getVxVyList = function () {
+    //--------------- BEGIN PUBLIC UTILITY METHODS ---------------
+    function getVxVyList () {
       return [ velocityXNum, velocityYNum ];
-    };
+    }
 
-    stopScroll = function () {
+    function stopScroll () {
       var was_running = __false;
 
       if ( animIdto ) {
@@ -181,11 +188,13 @@
       animIdto = __undef;
 
       return was_running;
-    };
+    }
     //---------------- END PUBLIC UTILITY METHODS ----------------
 
     //--------------- BEGIN PUBLIC EVENT HANDLERS ----------------
-    onstartHandler = function ( event_obj ) {
+    function onstartHandler ( event_obj ) {
+      var view_h_px, view_w_px;
+
       employMode( event_obj );
 
       lastAnimMs   = __0;
@@ -196,19 +205,27 @@
       velocityXNum = __0;
       velocityYNum = __0;
 
+      if ( isBodyTag ) {
+        view_h_px = window.innerHeight;
+        view_w_px = window.innerWidth;
+      }
+      else {
+        view_h_px = $scrollBox.outerHeight(); 
+        view_w_px = $scrollBox.outerWidth();
+      }
+
       if ( doScrollY ) {
-        maxScrollTopNum  = $scrollBox.prop( 'scrollHeight' )
-          - $scrollBox.outerHeight();
+        maxScrollTopNum  = $scrollBox.prop( 'scrollHeight' ) - view_h_px;
       }
 
       if ( doScrollX ) {
-        maxScrollLeftNum = $scrollBox.prop( 'scrollWidth'  )
-          - $scrollBox.outerWidth();
+        maxScrollLeftNum = $scrollBox.prop( 'scrollWidth'  ) - view_w_px;
       }
-    };
+    }
 
-    onmoveHandler = function ( event_obj ) {
+    function onmoveHandler ( event_obj ) {
       var scrolltop_num, scrollleft_num;
+
       employMode( event_obj );
 
       if ( animIdto ) {
@@ -240,13 +257,14 @@
         scrollleft_num -= lastDxNum;
 
         if ( scrollleft_num < __0 ) { scrollleft_num = __0; }
-        if ( scrollleft_num > maxScrollLeftNum ) { scrollleft_num = maxScrollLeftNum; }
-
+        if ( scrollleft_num > maxScrollLeftNum ) {
+          scrollleft_num = maxScrollLeftNum;
+        }
         $scrollBox.prop( 'scrollLeft', scrollleft_num );
       }
-    };
+    }
 
-    onendHandler  = function ( event_obj ) {
+    function onendHandler ( event_obj ) {
       employMode( event_obj );
 
       if ( lastDtMs > __0 ) {
@@ -265,9 +283,8 @@
           animIdto   = animateScroll();
         }
       }
-    };
+    }
     //---------------- END PUBLIC EVENT HANDLERS -----------------
-    if ( ! $scrollBox ) { throw '_$scrollBox_must_be_provided_'; }
 
     return {
       _getVxVyList_     : getVxVyList,
